@@ -2,9 +2,7 @@ import "./App.css";
 import {
   BottomNavigation,
   BottomNavigationAction,
-  Button,
   Dialog,
-  Grid2,
 } from "@mui/material";
 import { PieChart } from "./components/PieChart";
 import { CategoriesList } from "./components/CategoriesList";
@@ -76,7 +74,7 @@ function App() {
       <BottomNavigation
         showLabels
         value={tab}
-        onChange={(event, newValue) => {
+        onChange={(_, newValue) => {
           if (newValue === Tab.add) {
             handleClickOpen("add")();
             return;
