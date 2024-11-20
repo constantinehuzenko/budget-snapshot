@@ -2,9 +2,7 @@ import { Categories, Category, DialogHook } from "../types";
 import { useSearchParams } from "react-router-dom";
 import { CATEGORIES_NAME } from "../constants";
 import {
-  Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -22,8 +20,6 @@ interface ModalEditCategoryProps {
 }
 
 export const ModalEditCategory = ({
-  handleClose,
-  handleDelete,
   dialog,
   onSubmit,
 }: ModalEditCategoryProps) => {
@@ -201,57 +197,57 @@ export const ModalEditCategory = ({
     </DialogContent>
   );
 
-  return (
-    <>
-      <DialogTitle>Edit category</DialogTitle>
-      <DialogContent>
-        <TextField
-          defaultValue={label}
-          autoFocus
-          required
-          name="category-name"
-          label="Category name"
-          type="text"
-          fullWidth
-          margin="dense"
-        />
+  // return (
+  //   <>
+  //     <DialogTitle>Edit category</DialogTitle>
+  //     <DialogContent>
+  //       <TextField
+  //         defaultValue={label}
+  //         autoFocus
+  //         required
+  //         name="category-name"
+  //         label="Category name"
+  //         type="text"
+  //         fullWidth
+  //         margin="dense"
+  //       />
 
-        <TextField
-          defaultValue={budget}
-          inputMode="numeric"
-          required
-          name="budget-plan"
-          label="Budget plan"
-          type="number"
-          fullWidth
-          margin="dense"
-        />
+  //       <TextField
+  //         defaultValue={budget}
+  //         inputMode="numeric"
+  //         required
+  //         name="budget-plan"
+  //         label="Budget plan"
+  //         type="number"
+  //         fullWidth
+  //         margin="dense"
+  //       />
 
-        <TextField
-          defaultValue={value}
-          inputMode="numeric"
-          required
-          name="spent-amount"
-          label="Spend amount"
-          type="number"
-          fullWidth
-          margin="dense"
-        />
-      </DialogContent>
+  //       <TextField
+  //         defaultValue={value}
+  //         inputMode="numeric"
+  //         required
+  //         name="spent-amount"
+  //         label="Spend amount"
+  //         type="number"
+  //         fullWidth
+  //         margin="dense"
+  //       />
+  //     </DialogContent>
 
-      <DialogActions sx={{ justifyContent: "space-between" }}>
-        <Button color="error" onClick={handleDelete}>
-          Delete
-        </Button>
-        <Grid2 container gap="8px">
-          <Button variant="text" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="text" type="submit">
-            Save
-          </Button>
-        </Grid2>
-      </DialogActions>
-    </>
-  );
+  //     <DialogActions sx={{ justifyContent: "space-between" }}>
+  //       <Button color="error" onClick={handleDelete}>
+  //         Delete
+  //       </Button>
+  //       <Grid2 container gap="8px">
+  //         <Button variant="text" onClick={handleClose}>
+  //           Cancel
+  //         </Button>
+  //         <Button variant="text" type="submit">
+  //           Save
+  //         </Button>
+  //       </Grid2>
+  //     </DialogActions>
+  //   </>
+  // );
 };

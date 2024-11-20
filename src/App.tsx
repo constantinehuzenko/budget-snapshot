@@ -39,7 +39,7 @@ function App() {
   const [tab, setTab] = useState(Tab.categories);
 
   const { data, sum, monthBudget, setSearchParams } = dataHook;
-  const { dialog, handleClickOpen, handleClose, onSubmit } = dialogHook;
+  const { dialog, handleClickOpen, handleClose } = dialogHook;
 
   return (
     <>
