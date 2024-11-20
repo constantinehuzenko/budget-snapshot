@@ -3,12 +3,13 @@
 @tailwind utilities;
 
 body {
-  max-width: 400px;
-  margin: 0 auto;
 }
 
 :root {
   position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-bottom: 64px;
   /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

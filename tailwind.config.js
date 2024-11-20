@@ -3,6 +3,9 @@ export default {
     darkMode: ["class"],
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
+		fontSize: {
+			xxs: '0.5rem',
+		},
   	extend: {
   		borderRadius: {
   			lg: 'var(--radius)',

@@ -30,6 +30,7 @@ export interface DialogHook {
   handleClickOpen: (type: DialogState["type"]) => () => void;
   handleClose: () => void;
   handleDelete: () => void;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export interface DataHook {

@@ -37,6 +37,7 @@ export const useDialog = ({ data }: DataHook) => {
     const formData = new FormData(event.currentTarget);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formJson = Object.fromEntries((formData as any).entries());
+    console.log("costa", event.currentTarget, dialog.type);
 
     if (dialog.type === "edit-sum") {
       setSearchParams((params) => ({

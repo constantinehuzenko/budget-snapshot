@@ -1,6 +1,5 @@
 import { SetURLSearchParams } from "react-router-dom";
 import { Categories, HandleOpenDialog } from "../types";
-import { Typography } from "@mui/material";
 import { Progress } from "./ui/progress";
 
 interface CategoriesListProps {
@@ -12,29 +11,36 @@ interface CategoriesListProps {
 export const CategoriesList = ({
   data,
   handleClickOpen,
-}: CategoriesListProps) =>
-  data?.map(
-    (category) =>
-      category?.displayCategory !== false && (
-        <div
-          onClick={handleClickOpen("edit-category", category?.id)}
-          className="flex-col w-full p-3 my-2 rounded-md transition hover:bg-slate-900 cursor-pointer"
-          key={category?.id}
-        >
-          <div className="flex justify-between flex-row w-full py-2">
-            <div>
-              <Typography variant="h6">{category?.label}</Typography>
-            </div>
-            <div>
-              <Typography variant="h6">
-                {category?.value}$ / {category?.budget}$
-              </Typography>
-            </div>
-          </div>
+}: CategoriesListProps) => {
+  return (
+    <div className="grid grid-cols-2">
+      {data?.map(
+        (category) =>
+          category?.displayCategory !== false && (
+            <div
+              onClick={handleClickOpen("edit-category", category?.id)}
+              className="flex-col w-full p-3 my-2 rounded-md transition hover:bg-slate-900 cursor-pointer"
+              key={category?.id}
+            >
+              <div className="flex justify-between items-center flex-row w-full py-2">
+                <div>
+                  <h4 className="text-lg text-muted-foreground">
+                    {category?.label}
+                  </h4>
+                </div>
+                <div>
+                  <h4 className="text-base text-muted-foreground">
+                    {category?.value}$ / {category?.budget}$
+                  </h4>
+                </div>
+              </div>
 
-          <div className="w-full">
-            <Progress value={(category?.value / category?.budget) * 100} />
-          </div>
-        </div>
-      )
+              <div className="w-full">
+                <Progress value={(category?.value / category?.budget) * 100} />
+              </div>
+            </div>
+          )
+      )}
+    </div>
   );
+};

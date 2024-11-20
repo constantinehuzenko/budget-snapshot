@@ -1,5 +1,4 @@
 import "./App.css";
-import { Dialog } from "@mui/material";
 import { PieChart } from "./components/PieChart";
 import { CategoriesList } from "./components/CategoriesList";
 import { ReactNode, useState } from "react";
@@ -10,6 +9,7 @@ import { useDialog } from "./hooks/useDialog";
 import { useData } from "./hooks/useData";
 import { ModalEditCategory } from "./components/ModalEditCategory";
 import { Tabs, TabsList, TabsTrigger } from "./components/ui/tabs";
+import { Dialog } from "./components/ui/dialog";
 
 // 🏠 🏦 🛒 🚘 💕 🐥 🐯 📋
 
@@ -23,11 +23,12 @@ const modalContent = ({
   handleDelete,
   handleClose,
   dialog,
+  onSubmit,
 }: DialogHook): Record<DialogType, ReactNode> => ({
   add: <ModalAddCategory {...{ handleClose }} />,
   "edit-sum": <ModalEditSum {...{ handleClose }} />,
   "edit-category": (
-    <ModalEditCategory {...{ handleClose, handleDelete, dialog }} />
+    <ModalEditCategory {...{ handleClose, handleDelete, dialog, onSubmit }} />
   ),
   none: null,
 });
@@ -80,14 +81,8 @@ function App() {
       </Tabs>
 
       <Dialog
-        disableRestoreFocus
         open={dialog.state}
-        onClose={handleClose}
-        fullWidth
-        PaperProps={{
-          component: "form",
-          onSubmit,
-        }}
+        onOpenChange={(open) => (open ? null : handleClose())}
       >
         {modalContent({ ...dialogHook, data })[dialog.type]}
       </Dialog>
