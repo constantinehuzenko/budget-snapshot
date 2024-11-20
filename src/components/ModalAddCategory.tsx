@@ -1,10 +1,10 @@
 import {
-  Button,
   DialogActions,
   DialogContent,
   DialogTitle,
   TextField,
 } from "@mui/material";
+import { Button } from "./ui/button";
 
 interface ModalAddCategoryProps {
   handleClose: () => void;
@@ -47,12 +47,8 @@ export const ModalAddCategory = ({ handleClose }: ModalAddCategoryProps) => {
       </DialogContent>
 
       <DialogActions>
-        <Button variant="text" onClick={handleClose}>
-          Cancel
-        </Button>
-        <Button variant="text" type="submit">
-          Add
-        </Button>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button type="submit">Add</Button>
       </DialogActions>
     </>
   );
