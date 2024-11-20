@@ -1,6 +1,7 @@
 import { SetURLSearchParams } from "react-router-dom";
 import { Categories, HandleOpenDialog } from "../types";
-import { Grid2, LinearProgress, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import { Progress } from "./ui/progress";
 
 interface CategoriesListProps {
   data: Categories;
@@ -15,28 +16,25 @@ export const CategoriesList = ({
   data?.map(
     (category) =>
       category?.displayCategory !== false && (
-        <Grid2
+        <div
           onClick={handleClickOpen("edit-category", category?.id)}
-          component="div"
-          width="100%"
-          container
-          marginBottom={3}
+          className="flex-col w-full p-3 my-2 rounded-md transition hover:bg-slate-900 cursor-pointer"
           key={category?.id}
         >
-          <Grid2 size={6} display="flex" alignItems="center">
-            <Typography variant="h6">{category?.label}</Typography>
-          </Grid2>
-          <Grid2 size={6} display="flex" justifyContent="flex-end">
-            <Typography variant="h6">
-              {category?.value}$ / {category?.budget}$
-            </Typography>
-          </Grid2>
-          <Grid2 size={12}>
-            <LinearProgress
-              variant="determinate"
-              value={(category?.value / category?.budget) * 100}
-            />
-          </Grid2>
-        </Grid2>
+          <div className="flex justify-between flex-row w-full py-2">
+            <div>
+              <Typography variant="h6">{category?.label}</Typography>
+            </div>
+            <div>
+              <Typography variant="h6">
+                {category?.value}$ / {category?.budget}$
+              </Typography>
+            </div>
+          </div>
+
+          <div className="w-full">
+            <Progress value={(category?.value / category?.budget) * 100} />
+          </div>
+        </div>
       )
   );

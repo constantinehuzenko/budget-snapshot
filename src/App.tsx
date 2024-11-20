@@ -1,9 +1,5 @@
 import "./App.css";
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Dialog,
-} from "@mui/material";
+import { Dialog } from "@mui/material";
 import { PieChart } from "./components/PieChart";
 import { CategoriesList } from "./components/CategoriesList";
 import { ReactNode, useState } from "react";
@@ -13,16 +9,14 @@ import { ModalEditSum } from "./components/ModalEditSum";
 import { useDialog } from "./hooks/useDialog";
 import { useData } from "./hooks/useData";
 import { ModalEditCategory } from "./components/ModalEditCategory";
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import PieChartIcon from "@mui/icons-material/PieChart";
+import { Tabs, TabsList, TabsTrigger } from "./components/ui/tabs";
 
 // 🏠 🏦 🛒 🚘 💕 🐥 🐯 📋
 
 enum Tab {
-  "categories",
-  "add",
-  "diagram",
+  "categories" = "categories",
+  "add" = "add",
+  "diagram" = "diagram",
 }
 
 const modalContent = ({
@@ -41,7 +35,7 @@ const modalContent = ({
 function App() {
   const dataHook = useData();
   const dialogHook = useDialog(dataHook);
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState(Tab.categories);
 
   const { data, sum, monthBudget, setSearchParams } = dataHook;
   const { dialog, handleClickOpen, handleClose, onSubmit } = dialogHook;
@@ -65,31 +59,25 @@ function App() {
         />
       ) : null}
 
-      {/* <Grid2 size={12} marginTop={12} paddingBottom={12}>
-        <Button onClick={handleClickOpen("add")} fullWidth variant="outlined">
-          Add new category
-        </Button>
-      </Grid2> */}
-
-      <BottomNavigation
-        showLabels
+      <Tabs
         value={tab}
-        onChange={(_, newValue) => {
-          if (newValue === Tab.add) {
-            handleClickOpen("add")();
-            return;
-          }
-
-          setTab(newValue);
-        }}
+        className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full flex justify-center my-4"
       >
-        <BottomNavigationAction
-          label="Categories"
-          icon={<AccountBalanceIcon />}
-        />
-        <BottomNavigationAction label="Add" icon={<AddCircleOutlineIcon />} />
-        <BottomNavigationAction label="Diagram" icon={<PieChartIcon />} />
-      </BottomNavigation>
+        <TabsList>
+          <TabsTrigger
+            value={Tab.categories}
+            onClick={() => setTab(Tab.categories)}
+          >
+            Categories
+          </TabsTrigger>
+          <TabsTrigger value={Tab.add} onClick={() => handleClickOpen("add")()}>
+            Add
+          </TabsTrigger>
+          <TabsTrigger value={Tab.diagram} onClick={() => setTab(Tab.diagram)}>
+            Diagram
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
 
       <Dialog
         disableRestoreFocus
