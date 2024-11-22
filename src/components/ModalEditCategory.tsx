@@ -11,6 +11,8 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import React from "react";
+import { Trash } from "lucide-react";
+import { NumberButtons } from "./NumberButtons";
 
 interface ModalEditCategoryProps {
   handleClose: () => void;
@@ -22,6 +24,7 @@ interface ModalEditCategoryProps {
 export const ModalEditCategory = ({
   dialog,
   onSubmit,
+  handleDelete,
 }: ModalEditCategoryProps) => {
   const [searchParams] = useSearchParams();
   const categories = JSON.parse(
@@ -34,10 +37,6 @@ export const ModalEditCategory = ({
 
   const refBudget = React.useRef<HTMLInputElement>(null);
   const refValue = React.useRef<HTMLInputElement>(null);
-
-  const onNumberButtonClick =
-    (ref: React.RefObject<HTMLInputElement>, amount: number) => () =>
-      (ref.current!.value = (parseInt(ref.current!.value) + amount).toString());
 
   return (
     <DialogContent>
@@ -73,54 +72,7 @@ export const ModalEditCategory = ({
             ref={refBudget}
           />
           <div className="col-span-3 col-start-2 flex justify-between">
-            <Button
-              onClick={onNumberButtonClick(refBudget, -1000)}
-              variant="outline"
-              size="icon"
-              type="button"
-            >
-              <span className="text-xxs">-1000</span>
-            </Button>
-            <Button
-              onClick={onNumberButtonClick(refBudget, -100)}
-              variant="outline"
-              size="icon"
-              type="button"
-            >
-              <span className="text-xxs">-100</span>
-            </Button>
-            <Button
-              onClick={onNumberButtonClick(refBudget, -10)}
-              variant="outline"
-              size="icon"
-              type="button"
-            >
-              <span className="text-xxs">-10</span>
-            </Button>
-            <Button
-              onClick={onNumberButtonClick(refBudget, 10)}
-              variant="outline"
-              size="icon"
-              type="button"
-            >
-              <span className="text-xxs">+10</span>
-            </Button>
-            <Button
-              onClick={onNumberButtonClick(refBudget, 100)}
-              variant="outline"
-              size="icon"
-              type="button"
-            >
-              <span className="text-xxs">+100</span>
-            </Button>
-            <Button
-              onClick={onNumberButtonClick(refBudget, 1000)}
-              variant="outline"
-              size="icon"
-              type="button"
-            >
-              <span className="text-xxs">+1000</span>
-            </Button>
+            <NumberButtons targetRef={refBudget} />
           </div>
         </div>
 
@@ -137,117 +89,23 @@ export const ModalEditCategory = ({
           />
 
           <div className="col-span-3 col-start-2 flex justify-between">
-            <Button
-              onClick={onNumberButtonClick(refValue, -1000)}
-              variant="outline"
-              size="icon"
-              type="button"
-            >
-              <span className="text-xxs">-1000</span>
-            </Button>
-            <Button
-              onClick={onNumberButtonClick(refValue, -100)}
-              variant="outline"
-              size="icon"
-              type="button"
-            >
-              <span className="text-xxs">-100</span>
-            </Button>
-            <Button
-              onClick={onNumberButtonClick(refValue, -10)}
-              variant="outline"
-              size="icon"
-              type="button"
-            >
-              <span className="text-xxs">-10</span>
-            </Button>
-            <Button
-              onClick={onNumberButtonClick(refValue, 10)}
-              variant="outline"
-              size="icon"
-              type="button"
-            >
-              <span className="text-xxs">+10</span>
-            </Button>
-            <Button
-              onClick={onNumberButtonClick(refValue, 100)}
-              variant="outline"
-              size="icon"
-              type="button"
-            >
-              <span className="text-xxs">+100</span>
-            </Button>
-            <Button
-              onClick={onNumberButtonClick(refValue, 1000)}
-              variant="outline"
-              size="icon"
-              type="button"
-            >
-              <span className="text-xxs">+1000</span>
-            </Button>
+            <NumberButtons targetRef={refValue} />
           </div>
         </div>
       </form>
 
-      <DialogFooter>
-        <Button form="edit-category-form" type="submit">
+      <DialogFooter className="grid grid-cols-4 items-center gap-2 mt-2">
+        <Button
+          onClick={handleDelete}
+          variant="destructive"
+          className="col-span-1"
+        >
+          <Trash />
+        </Button>
+        <Button form="edit-category-form" type="submit" className="col-span-3">
           Save changes
         </Button>
       </DialogFooter>
     </DialogContent>
   );
-
-  // return (
-  //   <>
-  //     <DialogTitle>Edit category</DialogTitle>
-  //     <DialogContent>
-  //       <TextField
-  //         defaultValue={label}
-  //         autoFocus
-  //         required
-  //         name="category-name"
-  //         label="Category name"
-  //         type="text"
-  //         fullWidth
-  //         margin="dense"
-  //       />
-
-  //       <TextField
-  //         defaultValue={budget}
-  //         inputMode="numeric"
-  //         required
-  //         name="budget-plan"
-  //         label="Budget plan"
-  //         type="number"
-  //         fullWidth
-  //         margin="dense"
-  //       />
-
-  //       <TextField
-  //         defaultValue={value}
-  //         inputMode="numeric"
-  //         required
-  //         name="spent-amount"
-  //         label="Spend amount"
-  //         type="number"
-  //         fullWidth
-  //         margin="dense"
-  //       />
-  //     </DialogContent>
-
-  //     <DialogActions sx={{ justifyContent: "space-between" }}>
-  //       <Button color="error" onClick={handleDelete}>
-  //         Delete
-  //       </Button>
-  //       <Grid2 container gap="8px">
-  //         <Button variant="text" onClick={handleClose}>
-  //           Cancel
-  //         </Button>
-  //         <Button variant="text" type="submit">
-  //           Save
-  //         </Button>
-  //       </Grid2>
-  //     </DialogActions>
-  //   </>
-  // );
 };
