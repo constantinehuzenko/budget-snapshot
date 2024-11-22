@@ -25,7 +25,7 @@ const modalContent = ({
   dialog,
   onSubmit,
 }: DialogHook): Record<DialogType, ReactNode> => ({
-  add: <ModalAddCategory {...{ handleClose }} />,
+  add: <ModalAddCategory {...{ handleClose, onSubmit }} />,
   "edit-sum": <ModalEditSum {...{ handleClose }} />,
   "edit-category": (
     <ModalEditCategory {...{ handleClose, handleDelete, dialog, onSubmit }} />

@@ -1,10 +1,5 @@
-import {
-  PiePlot,
-  ResponsiveChartContainer,
-  useDrawingArea,
-} from "@mui/x-charts";
 import { Category, HandleOpenDialog } from "../types";
-import { styled } from "@mui/material";
+import { ResponsivePie } from "@nivo/pie";
 
 interface PieChartProps {
   data: Array<Category>;
@@ -13,22 +8,6 @@ interface PieChartProps {
   monthBudget: number;
 }
 
-export const StyledText = styled("text")(({ theme }) => ({
-  fill: theme.palette.text.primary,
-  textAnchor: "middle",
-  dominantBaseline: "central",
-  fontSize: 20,
-}));
-
-export const PieCenterLabel = ({ children }: { children: React.ReactNode }) => {
-  const { width, height, left, top } = useDrawingArea();
-  return (
-    <StyledText x={left + width / 2} y={top + height / 2}>
-      {children}
-    </StyledText>
-  );
-};
-
 export const PieChart = ({
   data,
   handleClickOpen,
@@ -36,33 +15,34 @@ export const PieChart = ({
   monthBudget,
 }: PieChartProps) => {
   return (
-    <div onClick={handleClickOpen("edit-sum")} className="pie-wrapper">
-      <div className="pie-cover" />
-      <ResponsiveChartContainer
-        height={400}
-        series={[
+    <div className="relative max-h-dvh h-[80vh]">
+      <ResponsivePie
+        arcLabel={(params) => `${params.label} ${params.value}$`}
+        data={[
+          ...data,
           {
-            data: [
-              ...data,
-              {
-                id: "left-sum",
-                value: monthBudget - sum,
-                budget: 0,
-                label: "📋",
-                displayCategory: false,
-              },
-            ],
-            arcLabel: (params) => `${params.label} ${params.value}$`,
-            innerRadius: 80,
-            type: "pie",
+            id: "left-sum",
+            value: monthBudget - sum,
+            budget: 0,
+            label: "📋",
+            displayCategory: false,
           },
         ]}
+        innerRadius={0.65}
+        padAngle={0.9}
+        cornerRadius={8}
+        activeOuterRadiusOffset={8}
+        enableArcLinkLabels={false}
+        isInteractive={false}
+        arcLabelsSkipAngle={10}
+      />
+
+      <h2
+        onClick={handleClickOpen("edit-sum")}
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl cursor-pointer hover:opacity-90"
       >
-        <PiePlot />
-        <PieCenterLabel>
-          {sum}$ / {monthBudget}$
-        </PieCenterLabel>
-      </ResponsiveChartContainer>
+        {sum}$ / {monthBudget}$
+      </h2>
     </div>
   );
 };
