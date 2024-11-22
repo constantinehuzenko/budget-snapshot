@@ -23,9 +23,9 @@ export const PieChart = ({
           {
             id: "left-sum",
             value: monthBudget - sum,
-            budget: 0,
+            b: 0,
             label: "📋",
-            displayCategory: false,
+            dc: false,
           },
         ]}
         innerRadius={0.65}

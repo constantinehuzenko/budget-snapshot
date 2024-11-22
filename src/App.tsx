@@ -10,6 +10,8 @@ import { useData } from "./hooks/useData";
 import { ModalEditCategory } from "./components/ModalEditCategory";
 import { Tabs, TabsList, TabsTrigger } from "./components/ui/tabs";
 import { Dialog } from "./components/ui/dialog";
+import { Button } from "./components/ui/button";
+import { CheckIcon, CopyIcon } from "lucide-react";
 
 // 🏠 🏦 🛒 🚘 💕 🐥 🐯 📋
 
@@ -37,9 +39,23 @@ function App() {
   const dataHook = useData();
   const dialogHook = useDialog(dataHook);
   const [tab, setTab] = useState(Tab.categories);
+  const [copyIconState, setCopyIconState] = useState<"default" | "success">(
+    "default"
+  );
 
   const { data, sum, monthBudget, setSearchParams } = dataHook;
   const { dialog, handleClickOpen, handleClose } = dialogHook;
+
+  const handleOnCopy = () => {
+    try {
+      navigator.clipboard.writeText(window.location.href);
+      setCopyIconState("success");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setTimeout(() => setCopyIconState("default"), 1500);
+    }
+  };
 
   return (
     <>
@@ -77,6 +93,15 @@ function App() {
           <TabsTrigger value={Tab.diagram} onClick={() => setTab(Tab.diagram)}>
             Diagram
           </TabsTrigger>
+
+          <Button
+            onClick={handleOnCopy}
+            variant="ghost"
+            size="icon"
+            className="ml-0 rounded-lg"
+          >
+            {copyIconState === "default" ? <CopyIcon /> : <CheckIcon color='#15803d' />}
+          </Button>
         </TabsList>
       </Tabs>
 
