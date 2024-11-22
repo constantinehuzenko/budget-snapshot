@@ -16,7 +16,7 @@ export const CategoriesList = ({
     <div className="grid grid-cols-2">
       {data?.map(
         (category) =>
-          category?.displayCategory !== false && (
+          category?.dc !== false && (
             <div
               onClick={handleClickOpen("edit-category", category?.id)}
               className="flex-col w-full p-3 my-2 rounded-md transition hover:bg-slate-900 cursor-pointer"
@@ -30,13 +30,13 @@ export const CategoriesList = ({
                 </div>
                 <div>
                   <h4 className="text-base text-muted-foreground">
-                    {category?.value}$ / {category?.budget}$
+                    {category?.value}$ / {category?.b}$
                   </h4>
                 </div>
               </div>
 
               <div className="w-full">
-                <Progress value={(category?.value / category?.budget) * 100} />
+                <Progress value={(category?.value / category?.b) * 100} />
               </div>
             </div>
           )

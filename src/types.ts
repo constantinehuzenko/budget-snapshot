@@ -3,10 +3,10 @@ import { SetURLSearchParams } from "react-router-dom";
 export interface Category {
   id: string;
   value: number;
-  budget: number;
+  b: number; // budget plan
   label: string;
-  displayPay?: boolean;
-  displayCategory?: boolean;
+  dp?: boolean; // display pay
+  dc?: boolean; // display category
 }
 
 export type Categories = Array<Category>;

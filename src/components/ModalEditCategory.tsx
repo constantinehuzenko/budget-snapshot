@@ -31,7 +31,7 @@ export const ModalEditCategory = ({
     searchParams.get(CATEGORIES_NAME) as string
   ) as Categories;
 
-  const { label, value, budget } = categories.find(
+  const { label, value, b } = categories.find(
     ({ id }: { id: string }) => id === dialog.itemId
   ) as Category;
 
@@ -67,7 +67,7 @@ export const ModalEditCategory = ({
           <Input
             type="number"
             name="budget-plan"
-            defaultValue={budget}
+            defaultValue={b}
             className="col-span-3"
             ref={refBudget}
           />

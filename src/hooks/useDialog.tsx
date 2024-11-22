@@ -37,7 +37,6 @@ export const useDialog = ({ data }: DataHook) => {
     const formData = new FormData(event.currentTarget);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formJson = Object.fromEntries((formData as any).entries());
-    console.log("costa", event.currentTarget, dialog.type);
 
     if (dialog.type === "edit-sum") {
       setSearchParams((params) => ({
@@ -54,7 +53,7 @@ export const useDialog = ({ data }: DataHook) => {
           {
             id: uuid(),
             value: parseInt(formJson["spent-amount"]),
-            budget: parseInt(formJson["budget-plan"]),
+            b: parseInt(formJson["budget-plan"]),
             label: formJson["category-name"],
           },
         ]),
@@ -71,7 +70,7 @@ export const useDialog = ({ data }: DataHook) => {
                 return {
                   ...category,
                   value: parseInt(formJson["spent-amount"]),
-                  budget: parseInt(formJson["budget-plan"]),
+                  b: parseInt(formJson["budget-plan"]),
                   label: formJson["category-name"],
                 };
               }

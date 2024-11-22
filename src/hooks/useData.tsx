@@ -11,7 +11,7 @@ export const useData = () => {
 
   const sum = data?.reduce(
     (acc, category) =>
-      category?.displayCategory !== false ? acc + category?.value : 0,
+      category?.dc !== false ? acc + category?.value : 0,
     0
   );
 
