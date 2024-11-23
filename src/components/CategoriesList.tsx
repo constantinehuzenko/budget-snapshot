@@ -14,8 +14,12 @@ export const CategoriesList = ({
 }: CategoriesListProps) => {
   return (
     <div className="grid grid-cols-2">
-      {data?.map(
-        (category) =>
+      {data?.map((category) => {
+        const progressValue = (category?.value / category?.b) * 100;
+        const isOverBudget = category?.value > category?.b;
+        const progressColor = isOverBudget ? "[&>div]:bg-red-600" : "";
+
+        return (
           category?.dc !== false && (
             <div
               onClick={handleClickOpen("edit-category", category?.id)}
@@ -36,11 +40,12 @@ export const CategoriesList = ({
               </div>
 
               <div className="w-full">
-                <Progress value={(category?.value / category?.b) * 100} />
+                <Progress className={progressColor} value={progressValue} />
               </div>
             </div>
           )
-      )}
+        );
+      })}
     </div>
   );
 };
