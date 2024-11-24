@@ -26,7 +26,7 @@ export const ModalEditSum = ({ onSubmit }: ModalEditSumProps) => {
       <form onSubmit={onSubmit} className="grid gap-4 py-4" id="edit-sum-form">
         <div className="grid grid-cols-4 items-center gap-2">
           <Label htmlFor="month-budget" className="text-right">
-            Monthly budget
+            Budget
           </Label>
           <Input
             defaultValue={0}
