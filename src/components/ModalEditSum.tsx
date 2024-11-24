@@ -11,7 +11,6 @@ import React from "react";
 import { NumberButtons } from "./NumberButtons";
 
 interface ModalEditSumProps {
-  handleClose: () => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 

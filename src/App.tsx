@@ -28,7 +28,7 @@ const modalContent = ({
   onSubmit,
 }: DialogHook): Record<DialogType, ReactNode> => ({
   add: <ModalAddCategory {...{ handleClose, onSubmit }} />,
-  "edit-sum": <ModalEditSum {...{ handleClose }} />,
+  "edit-sum": <ModalEditSum {...{ onSubmit }} />,
   "edit-category": (
     <ModalEditCategory {...{ handleClose, handleDelete, dialog, onSubmit }} />
   ),
@@ -100,7 +100,11 @@ function App() {
             size="icon"
             className="ml-0 rounded-lg"
           >
-            {copyIconState === "default" ? <CopyIcon /> : <CheckIcon color='#15803d' />}
+            {copyIconState === "default" ? (
+              <CopyIcon />
+            ) : (
+              <CheckIcon color="#15803d" />
+            )}
           </Button>
         </TabsList>
       </Tabs>
